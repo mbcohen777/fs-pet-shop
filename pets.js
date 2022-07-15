@@ -28,7 +28,6 @@ switch (subCommand) {
                 let data = JSON.parse(str);
                 if (!data[index]) {
                     const pet = {}
-                    data.concat(pet)
                     pet.age = Number(`${process.argv[3]}`);
                     pet.kind = process.argv[4];
                     pet.name = process.argv[5];
