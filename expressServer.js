@@ -7,7 +7,7 @@ const port = 3000;
 
 app.use(express.json());
 
-app.get("/pets", async (res, next) => {
+app.get("/pets", async (req, res, next) => {
     const pets = await readPetsFile().catch(next);
     res.send(pets);
 });
@@ -19,7 +19,7 @@ app.get("/pets/:index", (req, res, next) => {
             res.send(pets[index]);
         } else {
             res.send(404);
-            res.send(`Invalid index: ${index}`);
+            res.send(`Invalid index given: ${index}`);
         }
     }).catch(next);
 });
@@ -34,7 +34,7 @@ app.post("/pets", (req, res, next) => {
     }).catch(next);
 });
 
-app.use((err, res) => {
+app.use((err, req, res, next) => {
     if (err) {
         res.status(500);
     }
